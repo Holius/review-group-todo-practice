@@ -17,22 +17,23 @@ class App extends React.Component {
 
     onType (event) {
         //console.log(event.target.value);
-        this.setState(
-            this.state.groceryItem = 'asfa'
-        )
+        this.setState({
+            groceryItem: event.target.value,
+        })
     }
 
     onSubmit() {
-        this.setState(
-            this.state.groceryList = [this.state.groceryItem, ...this.state.groceryList]
-        )
+        this.setState({
+            groceryList: [this.state.groceryItem, ...this.state.groceryList],
+            groceryItem: '',
+        })
     }
 
     render (props) {
         return (
           <div>
             <h1> My Grocery List </h1>
-                <Search onType={this.onType} onSubmit={this.onSubmit}/>
+                <Search onType={this.onType} onSubmit={this.onSubmit} text={this.state.groceryItem}/>
                 <GroceryList groceryList={this.state.groceryList} /> 
           </div> 
             
