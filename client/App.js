@@ -1,45 +1,70 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import GroceryList from "./GroceryList.js";
-import Search from "./Search.js";
+import ReactDom from 'react-dom';
+import GroceryList from './GroceryList.js';
+import Search from './Search.js';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            groceryItem: '',
-            groceryList: ['apple', 'milk', 'cookies']
-        }
+            newItem: '',
+            groceryList: ['Bawls']
+        };
         this.onType = this.onType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.clearField = this.clearField.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
 
     onType (event) {
-        //console.log(event.target.value);
         this.setState({
-            groceryItem: event.target.value,
+            newItem: event.target.value
         })
     }
 
-    onSubmit() {
+    clearField () {
         this.setState({
-            groceryList: [this.state.groceryItem, ...this.state.groceryList],
-            groceryItem: '',
+            newItem:'',
         })
     }
 
-    render (props) {
+    removeItem (event) {
+
+        console.log(event.target.id);
+        
+    }
+
+    onSubmit () {
+        if (this.state.newItem.length > 0) {
+            this.setState({
+                groceryList: [this.state.newItem, ...this.state.groceryList],
+                newItem: '',
+            })
+        } else {
+            this.setState({
+                newItem: 'type characters',
+            })
+        }
+    }
+
+    render () {
         return (
-          <div>
-            <h1> My Grocery List </h1>
-                <Search onType={this.onType} onSubmit={this.onSubmit} text={this.state.groceryItem}/>
-                <GroceryList groceryList={this.state.groceryList} /> 
-          </div> 
-            
+            <div>
+                <h1>Grocery List</h1>
+                <Search
+                    value={this.state.newItem}
+                    onType={this.onType}
+                    onSubmit={this.onSubmit}
+                    clearField={this.clearField}
+                    /> 
+                <GroceryList 
+                    groceryList={this.state.groceryList}
+                    removeItem={this.removeItem}
+                    />
+            </div>
         )
     }
-
 }
 
 export default App;

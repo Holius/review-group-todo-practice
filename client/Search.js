@@ -1,18 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-function Search (props) {
+function Search ({onType, onSubmit, value, clearField}) {
     return (
-    <div>
-        <input 
-            value={props.text}
-            onChange={props.onType}>
-        </input>
-        <button
-            onClick={props.onSubmit}>
-                Submit
-        </button>
-    </div>
+        <div>
+            <input
+                value={value}
+                onChange={onType}
+                onClick={clearField}
+            ></input>
+            <button
+                  onClick={onSubmit}
+            >Submit</button>
+        </div>
     )
 }
 

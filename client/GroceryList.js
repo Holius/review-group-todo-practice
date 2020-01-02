@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-function GroceryList ({groceryList}) {
+function GroceryList ({groceryList, removeItem}) {
     return (
         <div>
             <ul>
-            {groceryList.map( (item, index) => (
-                <li key={index}>{item}</li>
-            ))}
+                {groceryList.map( (item, index) => {
+                    return (
+                        <li key={`${index}${item}`} id={`${index}${item}`} onClick={removeItem}> {item} </li>
+                    )
+                })}
             </ul>
         </div>
     )
